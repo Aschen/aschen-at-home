@@ -13,7 +13,7 @@ class Document < ActiveRecord::Base
   do_not_validate_attachment_file_type :file
 
 
-  def from_folder(folder)
+  def self.from_folder(folder)
     Document.where(:folder_id => folder.id)
   end
 end
