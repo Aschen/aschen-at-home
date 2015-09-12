@@ -10,16 +10,23 @@ class DocumentsController < ApplicationController
   # GET /documents/1
   # GET /documents/1.json
   def show
+    @folder = Folder.find(@document.folder_id)
   end
 
   # GET /documents/new
   def new
     @document = Document.new
-    @folders = Folder.where(:user_id => current_user.id)
+    if params.has_key?("folder")
+      @folders = Folder.where(:id => params["folder"])
+    else
+      @folders = Folder.where(:user_id => current_user.id)
+    end
   end
 
   # GET /documents/1/edit
   def edit
+    @folders = Folder.where(:user_id => current_user.id)
+    @folder = @folders.select {|f| f.id == @document.folder_id}
   end
 
   # POST /documents

@@ -1,0 +1,16 @@
+%p#notice= notice
+%p
+  %strong Name:
+  = @document.name
+%p
+  %strong Path:
+  = @document.path
+%p
+  %strong Image:
+  = @document.image
+%p
+  %strong Folder:
+  = @document.folder_id
+= link_to 'Edit', edit_document_path(@document)
+|
+= link_to 'Back', @folder

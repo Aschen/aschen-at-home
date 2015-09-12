@@ -1,0 +1,18 @@
+%p#notice= notice
+%h1 My Documents
+%table
+  %thead
+    %tr
+      %th Name
+      %th{colspan: "2"}
+  %tbody
+    - if @folders
+      - @folders.each do |folder|
+        %tr
+          %td= link_to folder.name, folder
+          %td= link_to 'Edit', edit_folder_path(folder)
+          %td= link_to 'Destroy', folder, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Folder', new_folder_path
+%br/
+= link_to 'New Document', new_document_path
