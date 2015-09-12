@@ -1,4 +1,14 @@
-%h1 My Documents
+%h1 My folders
+%br
+
+%div
+  %span>
+    = link_to 'New Folder', new_folder_path
+    \-
+  %span>
+    = link_to 'New Document', new_document_path
+%br
+
 %table.table.table-bordered.table-hover
   %thead
     %tr
@@ -11,7 +21,3 @@
           %td= link_to folder.name, folder
           %td= link_to 'Edit', edit_folder_path(folder)
           %td= link_to 'Destroy', folder, method: :delete, data: { confirm: 'Are you sure?' }
-%br
-= link_to 'New Folder', new_folder_path
-%br
-= link_to 'New Document', new_document_path

@@ -1,5 +1,16 @@
 %h2
   = @folder.name
+%br
+
+
+%span>
+  = link_to 'Add document', new_document_path(:folder => @folder.id)
+  \-
+%span>
+  = link_to 'Edit folder', edit_folder_path(@folder)
+%br
+
+%br
 %table.table.table-bordered.table-hover
   %thead
     %tr
@@ -15,8 +26,5 @@
         %td= link_to 'Edit', edit_document_path(document)
         %td= link_to 'Delete', document, method: :delete
 %br
-= link_to 'Add document', new_document_path(:folder => @folder.id)
-|
-= link_to 'Edit', edit_folder_path(@folder)
-|
-= link_to 'Back', folders_path
+%span>
+  = link_to 'Back', folders_path
