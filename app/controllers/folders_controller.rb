@@ -71,6 +71,6 @@ class FoldersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def folder_params
       params["folder"]["user_id"] = current_user.id
-      params.require(:folder).permit(:name, :image, :user_id)
+      params.require(:folder).permit(:name, :user_id)
     end
 end

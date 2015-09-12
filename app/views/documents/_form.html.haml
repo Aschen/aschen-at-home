@@ -9,23 +9,17 @@
           %li= message
   .field
     = f.label :name
-    %br/
+    %br
     = f.text_field :name
+  %label File
+  %p #{@document.file_file_name} - #{number_to_human_size(@document.file_file_size)}
   .field
-    = f.label :path
-    %br/
-    = f.text_field :path
-  .field
-    = f.label :image
-    %br/
-    = f.text_field :image
-  .field
-    = f.label :file
+    = f.label "New file"
     %br
     = f.file_field :file
   .field
     = f.label :folder_id
-    %br/
+    %br
     = f.select :folder_id, @folders.collect { |f| [f.name, f.id] }
   .actions
     = f.submit
