@@ -19,13 +19,13 @@ class DocumentsController < ApplicationController
     if params.has_key?("folder")
       @folders = Folder.where(:id => params["folder"])
     else
-      @folders = Folder.where(:user_id => current_user.id)
+      @folders = Folder.from_user(current_user)
     end
   end
 
   # GET /documents/1/edit
   def edit
-    @folders = Folder.where(:user_id => current_user.id)
+    @folders = Folder.from_user(current_user)
     @folder = @folders.select {|f| f.id == @document.folder_id}
   end
 
@@ -65,9 +65,11 @@ class DocumentsController < ApplicationController
   # DELETE /documents/1
   # DELETE /documents/1.json
   def destroy
+    @folder = Folder.find(document_params[:folder_id])
+
     @document.destroy
     respond_to do |format|
-      format.html { redirect_to documents_url, notice: 'Document was successfully destroyed.' }
+      format.html { redirect_to @folder, notice: 'Document was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
