@@ -13,6 +13,13 @@
   %b Season:
   = @episode.season_id
 
+%p
+  %b Url
+  = @episode.url
+
+%video{"width" => "560", "height" => "330", "controls" => "controls"}
+  %source{"src" => @episode.url, "type" => "video/mp4"}
+
 = link_to 'Edit', edit_episode_path(@episode)
 \|
 = link_to 'Back', episodes_path

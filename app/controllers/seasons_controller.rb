@@ -64,7 +64,7 @@ class SeasonsController < ApplicationController
   # DELETE /seasons/1.json
   def destroy
     @series = Series.find(@season.series_id)
-    @season.episodes.each {|episode| episode.delete} 
+    @season.episodes.each {|episode| episode.delete}
     @season.destroy
 
     respond_to do |format|
