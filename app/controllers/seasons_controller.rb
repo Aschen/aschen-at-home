@@ -10,15 +10,19 @@ class SeasonsController < ApplicationController
   # GET /seasons/1
   # GET /seasons/1.json
   def show
+    @series = Series.find(@season.series_id)
+    @episodes = @season.episodes
   end
 
   # GET /seasons/new
   def new
     @season = Season.new
+    @season.series_id = params["series_id"]
   end
 
   # GET /seasons/1/edit
   def edit
+    @series = Series.find(@season.series_id)
   end
 
   # POST /seasons
@@ -28,6 +32,9 @@ class SeasonsController < ApplicationController
 
     respond_to do |format|
       if @season.save
+        @series = Series.find(@season.series_id)
+        # Create episodes
+        @season.episodes_count.times {|n| Episode.create(number: n + 1, watched: false, downloaded: false, season_id: @season.id)}
         format.html { redirect_to @season, notice: 'Season was successfully created.' }
         format.json { render :show, status: :created, location: @season }
       else
@@ -40,6 +47,8 @@ class SeasonsController < ApplicationController
   # PATCH/PUT /seasons/1
   # PATCH/PUT /seasons/1.json
   def update
+    @series = Series.find(@season.series_id)
+
     respond_to do |format|
       if @season.update(season_params)
         format.html { redirect_to @season, notice: 'Season was successfully updated.' }
@@ -54,9 +63,12 @@ class SeasonsController < ApplicationController
   # DELETE /seasons/1
   # DELETE /seasons/1.json
   def destroy
+    @series = Series.find(@season.series_id)
+    @season.episodes.each {|episode| episode.delete} 
     @season.destroy
+
     respond_to do |format|
-      format.html { redirect_to seasons_url, notice: 'Season was successfully destroyed.' }
+      format.html { redirect_to @series, notice: 'Season was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

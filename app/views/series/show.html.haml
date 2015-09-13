@@ -1,15 +1,29 @@
-%p#notice= notice
+%h1= @series.name
+%br
 
-%p
-  %b Name:
-  = @series.name
-%p
-  %b Key words:
-  = @series.key_words
-%p
-  %b User:
-  = @series.user_id
+%span
+  = link_to image_tag("icones/add_icone.png", size: '30x30'), new_season_path('series_id' => @series.id)
+  \-
+%span
+  = link_to image_tag("icones/edit_icone.png", size: '30x30'), edit_series_path(@series)
+%br
 
-= link_to 'Edit', edit_series_path(@series)
-\|
-= link_to 'Back', series_index_path
+%br
+%table.table.table-bordered.table-hover
+  %thead
+    %tr
+      %th Number
+      %th Episodes Count
+      %th Auto-download
+      %th{colspan: "2"} Actions
+  %tbody
+    - @seasons.each do |season|
+      %tr
+        %td{align: "center"}= link_to season.number, season
+        %td{align: "center"}= season.episodes_count
+        %td{align: "center"}= season.auto_download
+        %td{align: "center"}= link_to image_tag("icones/edit_icone.png", size: '30x30'), edit_season_path(season)
+        %td{align: "center"}= link_to image_tag("icones/delete_icone.png", size: '30x30'), season, method: :delete
+%br
+
+= link_to image_tag("icones/back_icone.png", size: '30x30'), series_index_path

@@ -4,12 +4,13 @@ class SeriesController < ApplicationController
   # GET /series
   # GET /series.json
   def index
-    @series = Series.all
+    @series = current_user.series
   end
 
   # GET /series/1
   # GET /series/1.json
   def show
+    @seasons = @series.seasons
   end
 
   # GET /series/new
@@ -28,7 +29,7 @@ class SeriesController < ApplicationController
 
     respond_to do |format|
       if @series.save
-        format.html { redirect_to @series, notice: 'Series was successfully created.' }
+        format.html { redirect_to series_index_path, notice: 'Series was successfully created.' }
         format.json { render :show, status: :created, location: @series }
       else
         format.html { render :new }
@@ -42,7 +43,7 @@ class SeriesController < ApplicationController
   def update
     respond_to do |format|
       if @series.update(series_params)
-        format.html { redirect_to @series, notice: 'Series was successfully updated.' }
+        format.html { redirect_to series_index_path, notice: 'Series was successfully updated.' }
         format.json { render :show, status: :ok, location: @series }
       else
         format.html { render :edit }
@@ -69,6 +70,7 @@ class SeriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def series_params
+      params["series"]["user_id"] = current_user.id
       params.require(:series).permit(:name, :key_words, :user_id)
     end
 end

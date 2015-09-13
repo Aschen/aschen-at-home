@@ -1,22 +1,20 @@
 = form_for @season do |f|
-  - if @season.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@season.errors.count, "error")} prohibited this season from being saved:"
-      %ul
-        - @season.errors.full_messages.each do |msg|
-          %li= msg
 
-  .field
+  - if @season.errors.any?
+    %h2= "#{pluralize(@season.errors.count, "error")} prohibited this season from being saved:"
+    %ul
+      - @season.errors.full_messages.each do |msg|
+        %li= msg
+
+  .field.form-group
     = f.label :number
-    = f.number_field :number
-  .field
+    = f.number_field :number, class: 'form-control'
+  .field.form-group
     = f.label :episodes_count
-    = f.number_field :episodes_count
-  .field
+    = f.number_field :episodes_count, class: 'form-control'
+  .field.form-group
     = f.label :auto_download
-    = f.check_box :auto_download
-  .field
-    = f.label :series_id
-    = f.number_field :series_id
+    = f.check_box :auto_download, {class: 'form-control'}
+    = f.hidden_field :series_id
   .actions
-    = f.submit 'Save'
+    = f.submit class: 'btn btn-default'

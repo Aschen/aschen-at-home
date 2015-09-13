@@ -1,4 +1,4 @@
-%h2
+%h1
   = @folder.name
 %br
 
@@ -25,5 +25,6 @@
         %td{align: "center"}= link_to image_tag("icones/edit_icone.png", size: '30x30'), edit_document_path(document)
         %td{align: "center"}= link_to image_tag("icones/delete_icone.png", size: '30x30'), document, method: :delete
 %br
+
 %span>
   = link_to image_tag("icones/back_icone.png", size: '30x30'), folders_path

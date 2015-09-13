@@ -19,13 +19,13 @@ class DocumentsController < ApplicationController
     if params.has_key?("folder")
       @folders = Folder.where(:id => params["folder"])
     else
-      @folders = Folder.from_user(current_user)
+      @folders = current_user.folders
     end
   end
 
   # GET /documents/1/edit
   def edit
-    @folders = Folder.from_user(current_user)
+    @folders = current_user.folders
     @folder = @folders.select {|f| f.id == @document.folder_id}
   end
 

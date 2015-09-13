@@ -11,9 +11,4 @@ class Document < ActiveRecord::Base
     :url => "/system/:class/:id_:basename.:extension",
     :path => ":rails_root/public/system/:class/:id_:basename.:extension"
   do_not_validate_attachment_file_type :file
-
-
-  def self.from_folder(folder)
-    Document.where(:folder_id => folder.id)
-  end
 end

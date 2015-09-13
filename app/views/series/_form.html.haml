@@ -1,4 +1,5 @@
 = form_for @series do |f|
+
   - if @series.errors.any?
     #error_explanation
       %h2= "#{pluralize(@series.errors.count, "error")} prohibited this series from being saved:"
@@ -6,14 +7,11 @@
         - @series.errors.full_messages.each do |msg|
           %li= msg
 
-  .field
+  .field.form-group
     = f.label :name
-    = f.text_field :name
-  .field
+    = f.text_field :name, class: 'form-control'
+  .field.form-group
     = f.label :key_words
-    = f.text_field :key_words
-  .field
-    = f.label :user_id
-    = f.number_field :user_id
+    = f.text_field :key_words, class: 'form-control'
   .actions
-    = f.submit 'Save'
+    = f.submit class: 'btn btn-default'

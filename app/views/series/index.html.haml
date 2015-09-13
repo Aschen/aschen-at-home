@@ -1,25 +1,20 @@
-%h1 Listing series
+%h1 My Series
+%br
 
-%table
+%span
+  = link_to image_tag("icones/add_icone.png", size: '30x30'), new_series_path
+
+%table.table.table-bordered.table-hover
   %thead
     %tr
       %th Name
       %th Key words
-      %th User
-      %th
-      %th
-      %th
+      %th{colspan: "2"}
 
   %tbody
     - @series.each do |series|
       %tr
-        %td= series.name
-        %td= series.key_words
-        %td= series.user_id
-        %td= link_to 'Show', series
-        %td= link_to 'Edit', edit_series_path(series)
-        %td= link_to 'Destroy', series, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Series', new_series_path
+        %td{align: "center"}= link_to series.name, series
+        %td{align: "center"}= series.key_words
+        %td{align: "center"}= link_to image_tag("icones/edit_icone.png", size: '30x30'), edit_series_path(series)
+        %td{align: "center"}= link_to image_tag("icones/delete_icone.png", size: '30x30'), series, :method => :delete, :data => { :confirm => 'Are you sure?' }

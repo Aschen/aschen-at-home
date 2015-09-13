@@ -4,13 +4,13 @@ class FoldersController < ApplicationController
   # GET /folders
   # GET /folders.json
   def index
-    @folders = Folder.from_user(current_user)
+    @folders = current_user.folders
   end
 
   # GET /folders/1
   # GET /folders/1.json
   def show
-    @documents = Document.from_folder(@folder)
+    @documents = @folder.documents
   end
 
   # GET /folders/new
