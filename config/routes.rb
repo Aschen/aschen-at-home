@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :wishes
+
   resources :documents
 
   resources :folders

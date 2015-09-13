@@ -1,0 +1,24 @@
+%h1 My wishes
+%br
+
+%span
+  = link_to image_tag("icones/add_icone.png", size: '30x30'), new_wish_path
+%br
+
+%br
+%table.table.table-bordered.table-hover
+  %thead
+    %tr
+      %th Name
+      %th Price
+      %th Link
+      %th{colspan: "2"} Actions
+
+  %tbody
+    - @wishes.each do |wish|
+      %tr
+        %td{align: "center"}= wish.name
+        %td{align: "center"}= wish.price
+        %td{align: "center"}= wish.link
+        %td{align: "center"}= link_to image_tag("icones/edit_icone.png", size: '30x30'), edit_wish_path(wish)
+        %td{align: "center"}= link_to image_tag("icones/delete_icone.png", size: '30x30'), wish, :method => :delete, :data => { :confirm => 'Are you sure?' }

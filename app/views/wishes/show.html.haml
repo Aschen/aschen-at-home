@@ -1,0 +1,11 @@
+%p
+  %b Name:
+  = @wish.name
+%p
+  %b Price:
+  = @wish.price
+%p
+  %b User:
+  = @wish.user_id
+
+= link_to image_tag("icones/back_icone.png", size: '30x30'), wishes_path
