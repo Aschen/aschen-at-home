@@ -6,5 +6,6 @@ class User < ActiveRecord::Base
 
   has_many :folders
   has_many :wishes
+  has_many :seasons
 
 end

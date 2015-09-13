@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Number:
+  = @season.number
+%p
+  %b Episodes count:
+  = @season.episodes_count
+%p
+  %b Auto download:
+  = @season.auto_download
+%p
+  %b Series:
+  = @season.series_id
+
+= link_to 'Edit', edit_season_path(@season)
+\|
+= link_to 'Back', seasons_path

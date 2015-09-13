@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  resources :episodes
+
+  resources :seasons
+
+  resources :series
+
   resources :wishes
 
   resources :documents

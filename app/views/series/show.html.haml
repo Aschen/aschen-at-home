@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @series.name
+%p
+  %b Key words:
+  = @series.key_words
+%p
+  %b User:
+  = @series.user_id
+
+= link_to 'Edit', edit_series_path(@series)
+\|
+= link_to 'Back', series_index_path

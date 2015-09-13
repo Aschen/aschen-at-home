@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Number:
+  = @episode.number
+%p
+  %b Watched:
+  = @episode.watched
+%p
+  %b Downloaded:
+  = @episode.downloaded
+%p
+  %b Season:
+  = @episode.season_id
+
+= link_to 'Edit', edit_episode_path(@episode)
+\|
+= link_to 'Back', episodes_path

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150913003416) do
+ActiveRecord::Schema.define(version: 20150913124120) do
 
   create_table "documents", force: :cascade do |t|
     t.string   "name"
@@ -24,8 +24,34 @@ ActiveRecord::Schema.define(version: 20150913003416) do
     t.datetime "file_updated_at"
   end
 
+  create_table "episodes", force: :cascade do |t|
+    t.integer  "number"
+    t.boolean  "watched"
+    t.boolean  "downloaded"
+    t.integer  "season_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "folders", force: :cascade do |t|
     t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "seasons", force: :cascade do |t|
+    t.integer  "number"
+    t.integer  "episodes_count"
+    t.boolean  "auto_download"
+    t.integer  "series_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "series", force: :cascade do |t|
+    t.string   "name"
+    t.string   "key_words"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
