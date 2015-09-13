@@ -13,11 +13,11 @@
   %thead
     %tr
       %th Name
-      %th{colspan: "2"}
+      %th{colspan: "2"} Actions
   %tbody
     - if @folders
       - @folders.each do |folder|
         %tr
-          %td= link_to folder.name, folder
-          %td= link_to 'Edit', edit_folder_path(folder)
-          %td= link_to 'Destroy', folder, method: :delete, data: { confirm: 'Are you sure?' }
+          %td{align: "center"}= link_to folder.name, folder
+          %td{align: "center"}= link_to image_tag("icones/edit_icone.png", size: '30x30'), edit_folder_path(folder)
+          %td{align: "center"}= link_to image_tag("icones/delete_icone.png", size: '30x30'), folder, method: :delete, data: { confirm: 'Are you sure?' }

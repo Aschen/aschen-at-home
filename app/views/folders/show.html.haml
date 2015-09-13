@@ -2,12 +2,11 @@
   = @folder.name
 %br
 
-
-%span>
-  = link_to 'Add document', new_document_path(:folder => @folder.id)
+%span
+  = link_to image_tag("icones/add_icone.png", size: '30x30'), new_document_path(:folder => @folder.id)
   \-
-%span>
-  = link_to 'Edit folder', edit_folder_path(@folder)
+%span
+  = link_to image_tag("icones/edit_icone.png", size: '30x30'), edit_folder_path(@folder)
 %br
 
 %br
@@ -16,15 +15,15 @@
     %tr
       %th Type
       %th Name
-      %th{colspan: "3"}
+      %th{colspan: "3"} Actions
   %tbody
     - @documents.each do |document|
       %tr
-        %td= image_tag content_type_icone(document.file), size: '25x25'
-        %td= document.name
-        %td= link_to 'Download', document.file.url
-        %td= link_to 'Edit', edit_document_path(document)
-        %td= link_to 'Delete', document, method: :delete
+        %td{align: "center"}= image_tag content_type_icone(document.file), size: '25x25'
+        %td{align: "center"}= document.name
+        %td{align: "center"}= link_to image_tag("icones/download_icone.png", size: '30x30'), document.file.url
+        %td{align: "center"}= link_to image_tag("icones/edit_icone.png", size: '30x30'), edit_document_path(document)
+        %td{align: "center"}= link_to image_tag("icones/delete_icone.png", size: '30x30'), document, method: :delete
 %br
 %span>
-  = link_to 'Back', folders_path
+  = link_to image_tag("icones/back_icone.png", size: '30x30'), folders_path
