@@ -23,7 +23,7 @@
         %td{align: "center"}= link_to episode.number, episode
         %td{align: "center"}= link_to icon_yes_no(episode.watched), episode_path(episode.id, 'episode[watched]' => !episode.watched), method: :patch
         %td{align: "center"}= icon_yes_no(episode.downloaded)
-        %td{align: "center"}= link_to "Download", {controller: :video_downloader, action: :episode, "episode_id" => episode.id}, method: :post
+        %td{align: "center"}= link_to "Download", {controller: :torrent_downloader, action: :episode, "episode_id" => episode.id}
         %td{align: "center"}= link_to image_tag("icones/download_icone.png", size: '30x30'), episode.url
         %td{align: "center"}= link_to image_tag("icones/edit_icone.png", size: '30x30'), edit_season_path(@season)
 %br

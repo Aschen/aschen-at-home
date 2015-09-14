@@ -22,7 +22,7 @@
         %td{align: "center"}= link_to season.number, season
         %td{align: "center"}= season.episodes_count
         %td{align: "center"}= link_to icon_yes_no(season.auto_download), season_path(season.id, 'season[auto_download]' => !season.auto_download), method: :patch
-        %td{align: "center"}= link_to "Download", "/download/season/#{season.id}"
+        %td{align: "center"}= link_to "Download", {controller: :torrent_downloader, action: :season, "season_id" => season.id}
         %td{align: "center"}= link_to image_tag("icones/show_icone.png", size: '30x30'), season
         %td{align: "center"}= link_to image_tag("icones/edit_icone.png", size: '30x30'), edit_season_path(season)
         %td{align: "center"}= link_to image_tag("icones/delete_icone.png", size: '30x30'), season, method: :delete

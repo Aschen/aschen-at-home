@@ -1,4 +1,4 @@
-class VideoDownloaderController < ApplicationController
+class TorrentDownloaderController < ApplicationController
 
   # GET/POST /login
   def login
@@ -15,12 +15,12 @@ class VideoDownloaderController < ApplicationController
     end
   end
 
-  # GET/POST /season/:season_id
+  # GET /season/:season_id
   def season
     season_id = params.require(:season_id)
 
     if !T411.authenticated?
-      redirect_to controller: :video_downloader, action: :login, destination: request.original_fullpath
+      redirect_to controller: :torrent_downloader, action: :login, destination: request.original_fullpath
       return
     end
 
@@ -43,7 +43,7 @@ class VideoDownloaderController < ApplicationController
     episode_id = params.require(:episode_id)
 
     if !T411.authenticated?
-      redirect_to controller: :video_downloader, action: :login, destination: request.original_fullpath
+      redirect_to controller: :torrent_downloader, action: :login, destination: request.original_fullpath
       return
     end
 
