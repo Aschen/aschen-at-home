@@ -54,3 +54,4 @@ gem 'html2haml'
 gem "haml-rails", "~> 0.9"
 
 gem "paperclip", "~> 4.3"
+

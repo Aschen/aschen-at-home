@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'series_downloader/home'
+
   resources :episodes
 
   resources :seasons
