@@ -1,0 +1,19 @@
+%h3= "Matching torrents for #{@series.name} season #{@season.number}"
+%br
+
+%table.table.table-bordered.table-hover
+  %thead
+    %tr
+      %th Name
+      %th Seeders
+      %th Size
+      %th Choose
+
+  %tbody
+    - @torrents.each do |torrent|
+      %tr
+        %td{align: "left"}= torrent["name"]
+        %td{align: "center"}= torrent["seeders"]
+        %td{align: "center"}= number_to_human_size(torrent["size"])
+        %td{align: "center"}= link_to image_tag("icones/download_icone.png", size: '30x30'), {controller: :video_downloader, action: :download, "torrent_id" => torrent["id"]}, method: :post
+%br

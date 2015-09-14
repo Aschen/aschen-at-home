@@ -1,6 +1,15 @@
 Rails.application.routes.draw do
 
-  get 'series_downloader/home'
+  get 'video_downloader/login'
+  post 'video_downloader/login'
+
+  get 'download/episode/:episode_id', :to => 'video_downloader#episode'
+  post 'download/episode/:episode_id', :to => 'video_downloader#episode'
+
+  get 'download/season/:season_id', :to => 'video_downloader#season'
+  post 'download/season/:season_id', :to => 'video_downloader#season'
+
+  post 'video_downloader/download'
 
   resources :episodes
 
