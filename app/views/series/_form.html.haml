@@ -14,7 +14,6 @@
     = f.label :key_words
     = f.text_field :key_words, class: 'form-control'
   -if @series.jacket?
-    %label Jacket
     = image_tag(@series.jacket.url)
   .field.form-group
     = f.label "New jacket"
