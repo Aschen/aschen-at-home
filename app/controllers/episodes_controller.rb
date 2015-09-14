@@ -28,7 +28,7 @@ class EpisodesController < ApplicationController
 
     respond_to do |format|
       if @episode.save
-        format.html { redirect_to @episode, notice: 'Episode was successfully created.' }
+        format.html { redirect_to :back, notice: 'Episode was successfully created.' }
         format.json { render :show, status: :created, location: @episode }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class EpisodesController < ApplicationController
   def update
     respond_to do |format|
       if @episode.update(episode_params)
-        format.html { redirect_to @episode, notice: 'Episode was successfully updated.' }
+        format.html { redirect_to :back, notice: 'Episode was successfully updated.' }
         format.json { render :show, status: :ok, location: @episode }
       else
         format.html { render :edit }

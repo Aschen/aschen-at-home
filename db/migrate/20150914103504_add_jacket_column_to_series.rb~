@@ -1,0 +1,4 @@
+class AddJacketColumnToSeries < ActiveRecord::Migration
+  def change
+  end
+end

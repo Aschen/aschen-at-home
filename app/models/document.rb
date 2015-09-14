@@ -9,6 +9,6 @@ class Document < ActiveRecord::Base
 
   has_attached_file :file,
     :url => "/system/:class/:id_:basename.:extension",
-    :path => ":rails_root/public/system/:class/:id_:basename.:extension"
+    :path => ":rails_root/public/system/:class/:id/:basename.:extension"
   do_not_validate_attachment_file_type :file
 end

@@ -29,7 +29,7 @@ class SeriesController < ApplicationController
 
     respond_to do |format|
       if @series.save
-        format.html { redirect_to series_index_path, notice: 'Series was successfully created.' }
+        format.html { redirect_to :back, notice: 'Series was successfully created.' }
         format.json { render :show, status: :created, location: @series }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class SeriesController < ApplicationController
   def update
     respond_to do |format|
       if @series.update(series_params)
-        format.html { redirect_to series_index_path, notice: 'Series was successfully updated.' }
+        format.html { redirect_to :back, notice: 'Series was successfully updated.' }
         format.json { render :show, status: :ok, location: @series }
       else
         format.html { render :edit }
@@ -71,6 +71,6 @@ class SeriesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def series_params
       params["series"]["user_id"] = current_user.id
-      params.require(:series).permit(:name, :key_words, :user_id)
+      params.require(:series).permit(:name, :key_words, :user_id, :jacket)
     end
 end

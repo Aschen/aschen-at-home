@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150913143953) do
+ActiveRecord::Schema.define(version: 20150914103504) do
 
   create_table "documents", force: :cascade do |t|
     t.string   "name"
@@ -54,8 +54,12 @@ ActiveRecord::Schema.define(version: 20150913143953) do
     t.string   "name"
     t.string   "key_words"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.string   "jacket_file_name"
+    t.string   "jacket_content_type"
+    t.integer  "jacket_file_size"
+    t.datetime "jacket_updated_at"
   end
 
   create_table "users", force: :cascade do |t|

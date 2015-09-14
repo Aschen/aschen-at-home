@@ -51,7 +51,7 @@ class SeasonsController < ApplicationController
 
     respond_to do |format|
       if @season.update(season_params)
-        format.html { redirect_to @season, notice: 'Season was successfully updated.' }
+        format.html { redirect_to :back, notice: 'Season was successfully updated.' }
         format.json { render :show, status: :ok, location: @season }
       else
         format.html { render :edit }
