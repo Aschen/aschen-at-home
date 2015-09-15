@@ -5,7 +5,7 @@ namespace :watcher do
     Rails.logger.info "Start checking for new video file"
 
     # List all file and directory
-    files = Dir.entries("#{Rails.root}/private/videos/").select {|e| e != "." && e != ".."}
+    files = Dir.entries(Rails.configuration.x.directories.videos).select {|e| e != "." && e != ".."}
 
     files.each do |file|
       # TODO : filter by completed tag
@@ -18,7 +18,7 @@ namespace :watcher do
         episodes = season.episodes
         season_dir = "#{series.name} Season #{season.number}".gsub!(' ', '_')
         public_dir = "#{Rails.root}/public/videos/#{season_dir}/"
-        private_dir = "#{Rails.root}/private/videos/#{file}/"
+        private_dir = "#{Rails.configuration.x.directories.videos}/#{file}/"
 
         # Select only video files
         videos = Dir.entries(private_dir).select{|e| !File.directory?(e) && is_video?(e)}
@@ -49,7 +49,7 @@ namespace :watcher do
         series = Series.find(season.series_id)
         season_dir = "#{series.name} Season #{season.number}".gsub!(' ', '_')
         public_dir = "#{Rails.root}/public/videos/#{season_dir}/"
-        episode_path = "#{Rails.root}/private/videos/#{file}"
+        episode_path = "#{Rails.configuration.x.directories.videos}/#{file}"
 
         # Create public dir for season if not exist
         FileUtils.mkdir_p(public_dir) unless File.directory?(public_dir)

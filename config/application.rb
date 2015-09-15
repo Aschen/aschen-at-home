@@ -24,9 +24,12 @@ module AschenHome
     config.active_record.raise_in_transactional_callbacks = true
 
     # Custom configuration start here :)
-    config.x.directories.videos = "/private/videos/"
-    config.x.directories.torrents = "/private/torrents/"
-
+    if Rails.env == "production"
+      config.x.directories.torrents = "/torrents/watch/"
+      config.x.directories.videos = "/torrents/completed/"
+    else
+      config.x.directories.torrents = "#{Rails.root}/private/torrents/"
+      config.x.directories.videos = "#{Rails.root}/private/videos/"
+    end
   end
 end
-

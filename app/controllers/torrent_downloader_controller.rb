@@ -94,7 +94,7 @@ class TorrentDownloaderController < ApplicationController
     end
 
     def torrents_directory
-      "#{Rails.root}#{Rails.configuration.x.directories.torrents}"
+      "#{Rails.configuration.x.directories.torrents}"
     end
 
     def t411_authenticate(t411)
