@@ -15,9 +15,11 @@ class TorrentDownloaderController < ApplicationController
     end
   end
 
-  # GET /season/:season_id
+  # GET /download/season/:season_id
   def season
     season_id = params.require(:season_id)
+    @type = "season"
+    @id = season_id
 
     if !T411.authenticated?
       redirect_to controller: :torrent_downloader, action: :login, destination: request.original_fullpath
@@ -38,9 +40,11 @@ class TorrentDownloaderController < ApplicationController
     render :show
   end
 
-  # GET/POST /episode/:episode_id
+  # GET /download/episode/:episode_id
   def episode
     episode_id = params.require(:episode_id)
+    @type = "episode"
+    @id = episode_id
 
     if !T411.authenticated?
       redirect_to controller: :torrent_downloader, action: :login, destination: request.original_fullpath
@@ -62,11 +66,22 @@ class TorrentDownloaderController < ApplicationController
     render :show
   end
 
-  # POST /download
+  # POST /download/go/:torrent_id
   def download
     torrent_id = params.require(:torrent_id)
+    type = params.require(:type)
+    id = params.require(:id)
 
-    T411::Torrents.download(torrent_id, torrents_dir)
+    T411::Torrents.download(torrent_id, torrents_directory)
+    # TODO : check file presence
+    torrent_info = TorrentFile.open(torrent_file(torrent_id)).to_h["info"]
+
+    if type == "season"
+      PendingDownload.create({name: torrent_info["name"], download_type: type, season_id: id})
+    elsif type == "episode"
+      PendingDownload.create({name: torrent_info["name"], download_type: type, episode_id: id})
+    end
+    # TODO : check record creation
 
     redirect_to :back
   end
@@ -74,13 +89,14 @@ class TorrentDownloaderController < ApplicationController
 
   private
 
-    def torrents_dir
-      dir = "#{Rails.root}/private/torrents/"
-      FileUtils.mkdir_p(dir) unless File.directory?(dir)
-      dir
+    def torrent_file(torrent_id)
+      "#{torrents_directory}#{torrent_id}.torrent"
     end
 
-    # return token or nil
+    def torrents_directory
+      "#{Rails.root}#{Rails.configuration.x.directories.torrents}"
+    end
+
     def t411_authenticate(t411)
       T411.authenticate(t411["username"], t411["password"]) unless T411.authenticated?
       return T411.authenticated?

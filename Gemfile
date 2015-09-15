@@ -44,16 +44,25 @@ group :development, :test do
   gem 'spring'
 end
 
+# Dealing with users
 gem 'devise'
 
+# Frontend stuff
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
-
 gem 'haml'
 gem 'html2haml'
 gem "haml-rails", "~> 0.9"
 
+# I like images!
 gem "paperclip", "~> 4.3"
 
+# T411 is the best.
 gem "t411", "~> 0.0.8", git: "https://github.com/Aschen/t411.git"
 gem 'json'
+
+# Can i readz torrents plz?
+gem 'torrent-ruby', '~> 0.1.6'
+
+# Automates me master!
+gem 'whenever', :require => false

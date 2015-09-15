@@ -22,5 +22,11 @@ module AschenHome
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    # Custom configuration start here :)
+    config.x.directories.videos = "/private/videos/"
+    config.x.directories.torrents = "/private/torrents/"
+
   end
 end
+

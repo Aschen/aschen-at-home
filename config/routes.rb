@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   get 'download/season/:season_id', :to => 'torrent_downloader#season'
 
-  post 'torrent_downloader/download'
+  post 'download/go/:torrent_id', :to => 'torrent_downloader#download'
 
   resources :episodes
 

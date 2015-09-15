@@ -15,5 +15,7 @@
         %td{align: "left"}= torrent["name"]
         %td{align: "center"}= torrent["seeders"]
         %td{align: "center"}= number_to_human_size(torrent["size"])
-        %td{align: "center"}= link_to image_tag("icones/download_icone.png", size: '30x30'), {controller: :torrent_downloader, action: :download, "torrent_id" => torrent["id"]}, method: :post
+        %td{align: "center"}= link_to image_tag("icones/download_icone.png", size: '30x30') |
+        , {controller: :torrent_downloader, action: :download, torrent_id: torrent["id"], type: @type, id: @id} |
+        , method: :post |
 %br
