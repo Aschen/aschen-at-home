@@ -19,4 +19,6 @@ Create series and season.
 
 Watch episodes with HTML5 video streaming.
 
+Download full season or episodes from T411
+
 Auto-download new episodes from T411. (comming soon)
