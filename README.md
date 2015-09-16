@@ -17,8 +17,10 @@ A interface to manage my series on my seedbox.
 
 Create series and season.
 
+Track watched episodes.
+
 Watch episodes with HTML5 video streaming.
 
-Download full season or episodes from T411
+Download full season or episodes from T411. (with seedbox)
 
 Auto-download new episodes from T411. (comming soon)
