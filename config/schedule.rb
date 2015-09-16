@@ -19,6 +19,9 @@
 
 # Learn more: http://github.com/javan/whenever
 
+# Set PATH for cron (otherwise no bundle command !)
+env :PATH, ENV['PATH']
+
 set :output, "/home/app/webapp/log/cron_log.log"
 
 every 3.minute do
