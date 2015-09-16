@@ -30,7 +30,4 @@
 
 /vendor/cache
 
-todo.txt
-docker.txt
-
 config/database.yml
