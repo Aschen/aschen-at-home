@@ -9,9 +9,21 @@ default: &default
   pool: 5
   timeout: 5000
 
+postgre: &postgre
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  host: aschen.ovh
+  database: 
+  username: 
+  password: 
+
 development:
   <<: *default
   database: db/development.sqlite3
+
+#development:
+#  <<: *postgre
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -21,5 +33,4 @@ test:
   database: db/test.sqlite3
 
 production:
-  <<: *default
-  database: db/production.sqlite3
+  <<: *postgre

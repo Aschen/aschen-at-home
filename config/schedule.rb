@@ -20,5 +20,5 @@
 # Learn more: http://github.com/javan/whenever
 
 every 3.minute do
-  rake "watcher:new_video"
+  rake "watcher:videos"
 end

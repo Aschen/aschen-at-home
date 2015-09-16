@@ -25,8 +25,8 @@ module AschenHome
 
     # Custom configuration start here :)
     if Rails.env == "production"
-      config.x.directories.torrents = "/torrents/watch/"
-      config.x.directories.videos = "/torrents/completed/"
+      config.x.directories.torrents = "/torrent/watch/"
+      config.x.directories.videos = "/torrent/completed/"
     else
       config.x.directories.torrents = "#{Rails.root}/private/torrents/"
       config.x.directories.videos = "#{Rails.root}/private/videos/"

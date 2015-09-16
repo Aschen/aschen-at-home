@@ -1,7 +1,7 @@
 namespace :watcher do
 
   desc "Watch for new video file, move them to public directory and update season/episode record"
-  task new_video: :environment do
+  task videos: :environment do
     Rails.logger.info "Start checking for new video file"
 
     # List all file and directory
@@ -10,6 +10,7 @@ namespace :watcher do
     files.each do |file|
       # TODO : filter by completed tag
       pending_download = PendingDownload.find_by(name: file)
+      next unless pending_download
 
       if pending_download.download_type == "season"
         Rails.logger.info "New season '#{file}' found !"
@@ -29,7 +30,7 @@ namespace :watcher do
         # Move video files and update records
         episodes.each do |episode|
           index = videos.index {|v| v.include?("E#{t411_number(episode.number)}")}
-          break if !index
+          next if !index
           File.rename("#{private_dir}/#{videos[index]}", "#{public_dir}/#{videos[index]}")
           episode.url = "/videos/#{season_dir}/#{videos[index]}"
           episode.downloaded = true
@@ -42,6 +43,7 @@ namespace :watcher do
         pending_download.completed = true
 
         Rails.logger.info "Season successfully moved"
+
       elsif pending_download.download_type == "episode"
         Rails.logger.info "New episode'#{file}' found !"
         episode = Episode.find(pending_download.episode_id)
