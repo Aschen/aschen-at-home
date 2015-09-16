@@ -10,6 +10,7 @@ class EpisodesController < ApplicationController
   # GET /episodes/1
   # GET /episodes/1.json
   def show
+    @season = Season.find(@episode.season_id)
   end
 
   # GET /episodes/new
@@ -54,6 +55,9 @@ class EpisodesController < ApplicationController
   # DELETE /episodes/1
   # DELETE /episodes/1.json
   def destroy
+    file_path = "#{Rails.root}/public/#{@episode.url}"
+    File.delete(file_path) unless !File.exist?(file_path)
+
     @episode.destroy
     respond_to do |format|
       format.html { redirect_to episodes_url, notice: 'Episode was successfully destroyed.' }

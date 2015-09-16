@@ -29,7 +29,7 @@ class SeriesController < ApplicationController
 
     respond_to do |format|
       if @series.save
-        format.html { redirect_to :back, notice: 'Series was successfully created.' }
+        format.html { redirect_to series_index_path, notice: 'Series was successfully created.' }
         format.json { render :show, status: :created, location: @series }
       else
         format.html { render :new }

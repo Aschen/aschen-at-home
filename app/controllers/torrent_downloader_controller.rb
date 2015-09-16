@@ -78,12 +78,21 @@ class TorrentDownloaderController < ApplicationController
 
     if type == "season"
       PendingDownload.create({name: torrent_info["name"], download_type: type, season_id: id})
+      episodes = Episode.find_by(season_id: id)
+      # TODO : optimize request
+      episodes.each do |episode|
+        episode.downloaded = true
+        episode.save
+      end
     elsif type == "episode"
       PendingDownload.create({name: torrent_info["name"], download_type: type, episode_id: id})
+      episode = Episode.find(id)
+      episode.downloaded = true
+      episode.save
     end
     # TODO : check record creation
 
-    redirect_to :back
+    redirect_to :controller => 'seasons', :action => 'show', :id => id
   end
 
 

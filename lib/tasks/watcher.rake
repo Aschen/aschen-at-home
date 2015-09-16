@@ -33,11 +33,11 @@ namespace :watcher do
           next if !index
           File.symlink("#{private_dir}/#{videos[index]}", "#{public_dir}/#{videos[index]}")
           episode.url = "/videos/#{season_dir}/#{videos[index]}"
-          episode.downloaded = true
           episode.save
         end
 
         pending_download.completed = true
+        pending_download.save
 
         Rails.logger.info "Season successfully moved"
 
@@ -50,8 +50,12 @@ namespace :watcher do
         public_dir = "#{Rails.root}/public/videos/#{season_dir}/"
         private_dir = "#{Rails.configuration.x.directories.videos}/#{file}/"
 
-        # Select only video files
-        video = Dir.entries(private_dir).select{|e| !File.directory?(e) && is_video?(e)}.first
+        # Find video file
+        if File.directory(private_dir)
+          video = Dir.entries(private_dir).select{|e| !File.directory?(e) && is_video?(e)}.first
+        else
+          video = private_dir
+        end
 
         # Create public dir for season if not exist
         FileUtils.mkdir_p(public_dir) unless File.directory?(public_dir)
@@ -59,10 +63,10 @@ namespace :watcher do
         # Create a link and update record
         File.symlink("#{private_dir}/#{video}", "#{public_dir}/#{video}")
         episode.url = "/videos/#{season_dir}/#{video}"
-        episode.downloaded = true
         episode.save
 
         pending_download.completed = true
+        pending_download.save
 
         Rails.logger.info "Episode successfully moved"
       end

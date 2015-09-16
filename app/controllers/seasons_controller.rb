@@ -64,6 +64,10 @@ class SeasonsController < ApplicationController
   # DELETE /seasons/1.json
   def destroy
     @series = Series.find(@season.series_id)
+    season_path = "#{Rails.root}/public/videos/#{@series.name} Season #{@season.number}".gsub!(' ', '_')
+    FileUtils.remove_dir(season_path, true)
+
+    # TODO : optimize request
     @season.episodes.each {|episode| episode.delete}
     @season.destroy
 
