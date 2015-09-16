@@ -35,5 +35,8 @@ RUN bundle install
 # Add the rails app
 ADD . /home/app/webapp
 
+# Fix rights and write crontab
+RUN cd /home/app/webapp ; chown -R app:app . ; whenever -u app -w
+
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

@@ -27,18 +27,15 @@ namespace :watcher do
         # Create public dir for season if not exist
         FileUtils.mkdir_p(public_dir) unless File.directory?(public_dir)
 
-        # Move video files and update records
+        # Create a hard link and update record
         episodes.each do |episode|
           index = videos.index {|v| v.include?("E#{t411_number(episode.number)}")}
           next if !index
-          File.rename("#{private_dir}/#{videos[index]}", "#{public_dir}/#{videos[index]}")
+          File.link("#{private_dir}/#{videos[index]}", "#{public_dir}/#{videos[index]}")
           episode.url = "/videos/#{season_dir}/#{videos[index]}"
           episode.downloaded = true
           episode.save
         end
-
-        # Remove dir
-        FileUtils.remove_dir(private_dir, true)
 
         pending_download.completed = true
 
@@ -56,8 +53,8 @@ namespace :watcher do
         # Create public dir for season if not exist
         FileUtils.mkdir_p(public_dir) unless File.directory?(public_dir)
 
-        # Move video file and update record
-        File.rename(episode_path, "#{public_dir}/#{file}")
+        # Create a hard link and update record
+        File.link(episode_path, "#{public_dir}/#{file}")
         episode.url = "/videos/#{season_dir}/#{file}"
         episode.downloaded = true
         episode.save

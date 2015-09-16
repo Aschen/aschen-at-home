@@ -19,6 +19,8 @@
 
 # Learn more: http://github.com/javan/whenever
 
+set :output, "/home/app/webapp/log/cron_log.log"
+
 every 3.minute do
   rake "watcher:videos"
 end
