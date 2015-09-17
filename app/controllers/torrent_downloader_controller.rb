@@ -34,7 +34,7 @@ class TorrentDownloaderController < ApplicationController
     @torrents = JSON(T411::Torrents.search(query, limit: 10))["torrents"]
     if @torrents
       # Sort by size
-      @torrents.sort_by!{|t| t["size"].to_i}.reverse!
+      @torrents.sort_by!{ |t| t['size'].to_i }.reverse!
     end
 
     render :show

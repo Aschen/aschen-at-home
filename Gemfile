@@ -43,6 +43,9 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+ 
+  # Vade retro spaghetti code
+  gem 'rubocop', require: false
 end
 
 
@@ -68,3 +71,4 @@ gem 'torrent-ruby', '~> 0.1.6'
 
 # Automates me master!
 gem 'whenever', :require => false
+
