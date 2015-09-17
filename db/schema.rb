@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150915100514) do
+ActiveRecord::Schema.define(version: 20150917083401) do
 
   create_table "documents", force: :cascade do |t|
     t.string   "name"
@@ -29,9 +29,10 @@ ActiveRecord::Schema.define(version: 20150915100514) do
     t.boolean  "watched"
     t.boolean  "downloaded"
     t.integer  "season_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "url"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "original_file"
+    t.string   "mp4_file"
   end
 
   create_table "folders", force: :cascade do |t|

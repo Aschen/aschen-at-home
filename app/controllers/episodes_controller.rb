@@ -55,7 +55,7 @@ class EpisodesController < ApplicationController
   # DELETE /episodes/1
   # DELETE /episodes/1.json
   def destroy
-    file_path = "#{Rails.root}/public/#{@episode.url}"
+    file_path = "#{Rails.root}/public/#{@episode.original_file}"
     File.delete(file_path) unless !File.exist?(file_path)
 
     @episode.destroy

@@ -32,7 +32,7 @@ namespace :watcher do
           index = videos.index {|v| v.include?("E#{t411_number(episode.number)}")}
           next if !index
           File.symlink("#{private_dir}/#{videos[index]}", "#{public_dir}/#{videos[index]}")
-          episode.url = "/videos/#{season_dir}/#{videos[index]}"
+          episode.original_file = "/videos/#{season_dir}/#{videos[index]}"
           episode.save
         end
 
@@ -62,7 +62,7 @@ namespace :watcher do
 
         # Create a link and update record
         File.symlink("#{private_dir}/#{video}", "#{public_dir}/#{video}")
-        episode.url = "/videos/#{season_dir}/#{video}"
+        episode.original_file = "/videos/#{season_dir}/#{video}"
         episode.save
 
         pending_download.completed = true

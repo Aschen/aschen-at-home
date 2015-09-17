@@ -89,10 +89,12 @@ class TorrentDownloaderController < ApplicationController
       episode = Episode.find(id)
       episode.downloaded = true
       episode.save
+      # Prepare redirection
+      id = Season.find(episode.season_id).id
     end
     # TODO : check record creation
 
-    redirect_to :controller => 'seasons', :action => 'show', :id => id
+    redirect_to controller: 'seasons', action: 'show', id: id
   end
 
 
