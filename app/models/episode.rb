@@ -5,7 +5,8 @@ class Episode < ActiveRecord::Base
 
   default_scope { order(number: :asc) }
 
-  after_create :convert_to_mp4
+  # Start conversion when file is added
+  after_update :convert_to_mp4, if: :original_file_changed?
 
   private
 
