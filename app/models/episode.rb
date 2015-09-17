@@ -11,8 +11,8 @@ class Episode < ActiveRecord::Base
   private
 
   def convert_to_mp4
-    Rails.logger.info("Start converting #{original_file} to mp4")
-    avi_path = "#{Rails.root}/#{original_file}"
+    avi_path = "#{Rails.root}/public/#{original_file}"
+    Rails.logger.info("Start converting #{avi_path} to mp4")
     avi_video = FFMPEG::Movie.new(avi_path)
     options = { video_codec: 'libx264', audio_codec: 'libfdk_aac',
                 custom: '-movflags +faststart', threads: 3 }
