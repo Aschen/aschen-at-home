@@ -19,7 +19,6 @@ RUN rm /etc/nginx/sites-enabled/default
 # Add the nginx info
 ADD nginx.conf /etc/nginx/sites-enabled/webapp.conf
 
-
 # === 4 ===
 # Prepare folders
 RUN mkdir /home/app/webapp
@@ -43,7 +42,7 @@ ADD . /home/app/webapp
 
 # === 8 ===
 # Fix rights and write crontab
-RUN cd /home/app/webapp ; chown -R app:app . ; whenever -u app -w ; rake assets:precompile
+RUN cd /home/app/webapp ; chown -R app:app . ; whenever -u app -w
 
 # === 9 ===
 # Clean up APT when done.

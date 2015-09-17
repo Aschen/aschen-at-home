@@ -56,7 +56,7 @@ class EpisodesController < ApplicationController
   # DELETE /episodes/1.json
   def destroy
     file_path = "#{Rails.root}/public/#{@episode.original_file}"
-    File.delete(file_path) unless !File.exist?(file_path)
+    File.delete(file_path) if File.exist?(file_path)
 
     @episode.destroy
     respond_to do |format|
@@ -72,8 +72,9 @@ class EpisodesController < ApplicationController
     @episode = Episode.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
+  # Never trust parameters from the scary internet, only allow white list
   def episode_params
-    params.require(:episode).permit(:number, :watched, :downloaded, :season_id, :url)
+    params.require(:episode).permit(:number, :watched, :downloaded,
+                                    :season_id, :original_file, :mp4_file)
   end
 end

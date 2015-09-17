@@ -31,5 +31,8 @@ module AschenHome
       config.x.directories.torrents = "#{Rails.root}/private/torrents/"
       config.x.directories.videos = "#{Rails.root}/private/videos/"
     end
+
+    # Delayed job
+    config.active_job.queue_adapter = :delayed_job
   end
 end

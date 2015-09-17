@@ -1,0 +1,4 @@
+check process delayed_job 
+  with pidfile /home/app/webapp/shared/delayed_job.pid
+  start program = "/usr/bin/env RAILS_ENV=production /home/app/webapp/bin/delayed_job start"
+  stop program = "/usr/bin/env RAILS_ENV=production /home/app/webapp/bin/delayed_job stop"

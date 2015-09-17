@@ -72,3 +72,7 @@ gem 'torrent-ruby', '~> 0.1.6'
 # Automates me master!
 gem 'whenever', :require => false
 
+# Even videos can change gender
+gem 'streamio-ffmpeg'
+gem 'delayed_job_active_record'
+gem 'daemons'
