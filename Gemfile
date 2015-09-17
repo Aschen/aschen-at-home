@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 ruby '2.2.0'
 
@@ -6,6 +6,7 @@ ruby '2.2.0'
 gem 'rails', '4.2.0'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
+gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -42,15 +43,32 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+ 
+  # Vade retro spaghetti code
+  gem 'rubocop', require: false
 end
 
+
+# Dealing with users
 gem 'devise'
 
+# Frontend stuff
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
-
 gem 'haml'
 gem 'html2haml'
 gem "haml-rails", "~> 0.9"
 
+# I like images!
 gem "paperclip", "~> 4.3"
+
+# T411 is the best.
+gem "t411", "~> 0.0.8", git: "https://github.com/Aschen/t411.git"
+gem 'json'
+
+# Can i readz torrents plz?
+gem 'torrent-ruby', '~> 0.1.6'
+
+# Automates me master!
+gem 'whenever', :require => false
+

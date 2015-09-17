@@ -7,6 +7,7 @@
 %table.table.table-bordered.table-hover
   %thead
     %tr
+      %th
       %th Name
       %th Key words
       %th{colspan: "2"}
@@ -14,6 +15,7 @@
   %tbody
     - @series.each do |series|
       %tr
+        %td{align: "center"}= link_to image_tag(series.jacket.url, size: '50x50'), series
         %td{align: "center"}= link_to series.name, series
         %td{align: "center"}= series.key_words
         %td{align: "center"}= link_to image_tag("icones/edit_icone.png", size: '30x30'), edit_series_path(series)

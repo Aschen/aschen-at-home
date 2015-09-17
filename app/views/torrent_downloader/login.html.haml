@@ -1,0 +1,14 @@
+%h1 Download your episodes from t411
+%br
+
+%h2 Log in
+= form_tag(action: :login, method: "post") do
+  = field_set_tag nil, class: 'form-group' do
+    = label_tag :t411_username, 'T411 Username'
+    = text_field_tag 't411[username]'
+    %br
+    = label_tag :t411_password, 'T411 Password'
+    = password_field_tag 't411[password]'
+    = hidden_field_tag 'destination', @destination
+    %br
+    = submit_tag 'Go!'

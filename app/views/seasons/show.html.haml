@@ -15,14 +15,15 @@
     %tr
       %th Number
       %th Watched
-      %th Downloaded
-      %th{colspan: "1"} Action
+      %th Watch
+      %th{colspan: "2"} Action
   %tbody
     - @episodes.each do |episode|
       %tr
         %td{align: "center"}= link_to episode.number, episode
-        %td{align: "center"}= episode.watched
-        %td{align: "center"}= episode.downloaded
+        %td{align: "center"}= link_to icon_yes_no(episode.watched), episode_path(episode.id, 'episode[watched]' => !episode.watched), method: :patch
+        %td{align: "center"}= link_to download_state_image(episode), episode.url
+        %td{align: "center"}= link_to "Download", {controller: :torrent_downloader, action: :episode, "episode_id" => episode.id}
         %td{align: "center"}= link_to image_tag("icones/edit_icone.png", size: '30x30'), edit_season_path(@season)
 %br
 

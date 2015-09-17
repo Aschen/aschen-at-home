@@ -16,8 +16,19 @@
 !/log/.keep
 /tmp
 
+# Ignore temp files
+*~
+*#*
+
 /public/system/
+
 *mp4
-*webm
-*ogg
 *avi
+*ogg
+*webm
+*torrent
+
+/vendor/cache
+
+config/database.yml
+

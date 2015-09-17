@@ -10,6 +10,7 @@ class EpisodesController < ApplicationController
   # GET /episodes/1
   # GET /episodes/1.json
   def show
+    @season = Season.find(@episode.season_id)
   end
 
   # GET /episodes/new
@@ -28,7 +29,7 @@ class EpisodesController < ApplicationController
 
     respond_to do |format|
       if @episode.save
-        format.html { redirect_to @episode, notice: 'Episode was successfully created.' }
+        format.html { redirect_to :back, notice: 'Episode was successfully created.' }
         format.json { render :show, status: :created, location: @episode }
       else
         format.html { render :new }
@@ -42,7 +43,7 @@ class EpisodesController < ApplicationController
   def update
     respond_to do |format|
       if @episode.update(episode_params)
-        format.html { redirect_to @episode, notice: 'Episode was successfully updated.' }
+        format.html { redirect_to :back, notice: 'Episode was successfully updated.' }
         format.json { render :show, status: :ok, location: @episode }
       else
         format.html { render :edit }
@@ -54,6 +55,9 @@ class EpisodesController < ApplicationController
   # DELETE /episodes/1
   # DELETE /episodes/1.json
   def destroy
+    file_path = "#{Rails.root}/public/#{@episode.url}"
+    File.delete(file_path) unless !File.exist?(file_path)
+
     @episode.destroy
     respond_to do |format|
       format.html { redirect_to episodes_url, notice: 'Episode was successfully destroyed.' }
@@ -62,13 +66,14 @@ class EpisodesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_episode
-      @episode = Episode.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def episode_params
-      params.require(:episode).permit(:number, :watched, :downloaded, :season_id, :url)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_episode
+    @episode = Episode.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def episode_params
+    params.require(:episode).permit(:number, :watched, :downloaded, :season_id, :url)
+  end
 end

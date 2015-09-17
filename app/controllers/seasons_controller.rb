@@ -51,7 +51,7 @@ class SeasonsController < ApplicationController
 
     respond_to do |format|
       if @season.update(season_params)
-        format.html { redirect_to @season, notice: 'Season was successfully updated.' }
+        format.html { redirect_to :back, notice: 'Season was successfully updated.' }
         format.json { render :show, status: :ok, location: @season }
       else
         format.html { render :edit }
@@ -64,6 +64,10 @@ class SeasonsController < ApplicationController
   # DELETE /seasons/1.json
   def destroy
     @series = Series.find(@season.series_id)
+    season_path = "#{Rails.root}/public/videos/#{@series.name} Season #{@season.number}".gsub!(' ', '_')
+    FileUtils.remove_dir(season_path, true)
+
+    # TODO : optimize request
     @season.episodes.each {|episode| episode.delete}
     @season.destroy
 

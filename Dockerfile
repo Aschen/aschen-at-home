@@ -24,16 +24,27 @@ ADD nginx.conf /etc/nginx/sites-enabled/webapp.conf
 # Prepare folders
 RUN mkdir /home/app/webapp
 
-# === 5 ===
+# === 5 === 
+# Volumes and ports
+VOLUME ["/torrent/", "/home/app/webapp/public/"]
+EXPOSE 80
+EXPOSE 5432
+
+# === 6 ===
 # Run Bundle in a cache efficient way
 WORKDIR /tmp
 ADD Gemfile /tmp/
 ADD Gemfile.lock /tmp/
 RUN bundle install
 
-# === 6 ===
+# === 7 ===
 # Add the rails app
 ADD . /home/app/webapp
 
+# === 8 ===
+# Fix rights and write crontab
+RUN cd /home/app/webapp ; chown -R app:app . ; whenever -u app -w ; rake assets:precompile
+
+# === 9 ===
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

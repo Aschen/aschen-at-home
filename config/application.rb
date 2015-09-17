@@ -22,5 +22,14 @@ module AschenHome
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    # Custom configuration start here :)
+    if Rails.env == "production"
+      config.x.directories.torrents = "/torrent/watch/"
+      config.x.directories.videos = "/torrent/completed/"
+    else
+      config.x.directories.torrents = "#{Rails.root}/private/torrents/"
+      config.x.directories.videos = "#{Rails.root}/private/videos/"
+    end
   end
 end

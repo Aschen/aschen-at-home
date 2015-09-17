@@ -15,16 +15,9 @@
   %b Url
   = @episode.url
 
-%video#video_player.video-js.vjs-default-skin{"width" => "560", "height" => "330", "controls" => "controls", "preload" => "auto"}
-  %source{"src" => @episode.url, "type" => "video/mp4"}
-%div.vjs-control-bar
-  %div.vjs-play-control.vjs-control.vjs-paused{"role" => "button"}
-  %div.vjs-current-time.vjs-time-controls.vjs-control
-  %div.vjs-time-divider
-  %div.vjs-duration.vjs-time-controls.vjs-control
-%br
+%video{"width" => "560", "height" => "330", "controls" => "controls"}
+  %source{'src' => @episode.url, "type" => "video/mp4"}
 
-%br
 = link_to 'Edit', edit_episode_path(@episode)
 \|
-= link_to 'Back', episodes_path
+= link_to 'Back', @season
