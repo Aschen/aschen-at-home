@@ -3,10 +3,16 @@ class Episode < ActiveRecord::Base
   has_one :serie, through: :seasons
   has_one :pending_download
 
+  validates :number, presence: true
+  validates :season_id, presence: true
+
   default_scope { order(number: :asc) }
 
   # Start conversion when file is added
   after_update :convert_to_mp4, if: :original_file_changed?
+
+  # Delete physical files
+  before_destroy :delete_files
 
   private
 
@@ -22,5 +28,17 @@ class Episode < ActiveRecord::Base
     Rails.logger.info('Conversion success')
   end
   handle_asynchronously :convert_to_mp4
+
+  def delete_files
+    if original_file
+      path = "#{Rails.root}/public/#{@episode.original_file}"
+      File.delete(path) if File.exist?(path)
+    end
+
+    if mp4_file
+      path = "#{Rails.root}/public/#{@episode.mp4_file}"
+      File.delete(path) if File.exist?(path)
+    end
+  end
 
 end

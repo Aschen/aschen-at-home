@@ -9,9 +9,9 @@ class EpisodesController < ApplicationController
 
   # GET /episodes/1
   # GET /episodes/1.json
-  def show
-    @season = Season.find(@episode.season_id)
-  end
+  #def show
+  #  @season = Season.find(@episode.season_id)
+  #end
 
   # GET /episodes/new
   def new
@@ -23,46 +23,30 @@ class EpisodesController < ApplicationController
   end
 
   # POST /episodes
-  # POST /episodes.json
   def create
     @episode = Episode.new(episode_params)
 
-    respond_to do |format|
-      if @episode.save
-        format.html { redirect_to :back, notice: 'Episode was successfully created.' }
-        format.json { render :show, status: :created, location: @episode }
-      else
-        format.html { render :new }
-        format.json { render json: @episode.errors, status: :unprocessable_entity }
-      end
+    if @episode.save
+      redirect_to :back, notice: 'Episode was successfully created.'
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /episodes/1
-  # PATCH/PUT /episodes/1.json
   def update
-    respond_to do |format|
-      if @episode.update(episode_params)
-        format.html { redirect_to :back, notice: 'Episode was successfully updated.' }
-        format.json { render :show, status: :ok, location: @episode }
-      else
-        format.html { render :edit }
-        format.json { render json: @episode.errors, status: :unprocessable_entity }
-      end
+    if @episode.update(episode_params)
+      redirect_to :back, notice: 'Episode was successfully updated.'
+    else
+      render :edit
     end
   end
 
   # DELETE /episodes/1
   # DELETE /episodes/1.json
   def destroy
-    file_path = "#{Rails.root}/public/#{@episode.original_file}"
-    File.delete(file_path) if File.exist?(file_path)
-
     @episode.destroy
-    respond_to do |format|
-      format.html { redirect_to episodes_url, notice: 'Episode was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to episodes_url, notice: 'Episode was successfully destroyed.'
   end
 
   private
