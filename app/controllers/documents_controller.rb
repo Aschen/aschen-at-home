@@ -1,87 +1,72 @@
 class DocumentsController < ApplicationController
-  before_action :set_document, only: [:show, :edit, :update, :destroy]
+  before_action :set_document, only: [:edit, :update, :destroy]
+  before_action :set_user_folders, only: [:new, :edit]
+  before_action :set_document_folder, only: [:create, :update, :destroy]
 
   # GET /documents
-  # GET /documents.json
   def index
     @documents = Document.all
   end
 
   # GET /documents/1
-  # GET /documents/1.json
-  def show
-    @folder = Folder.find(@document.folder_id)
-  end
+  # def show
+  #  @folder = @document.folder
+  # end
 
   # GET /documents/new
   def new
     @document = Document.new
-    if params.has_key?("folder")
-      @folders = Folder.where(:id => params["folder"])
-    else
-      @folders = current_user.folders
-    end
+    @folders = Folder.where(id: params['folder']) if params.key?('folder')
   end
 
   # GET /documents/1/edit
   def edit
-    @folders = current_user.folders
-    @folder = @folders.select {|f| f.id == @document.folder_id}
+    @folder = @folders.select { |f| f.id == @document.folder_id }
   end
 
   # POST /documents
-  # POST /documents.json
   def create
     @document = Document.new(document_params)
-    @folder = Folder.find(document_params[:folder_id])
 
-    respond_to do |format|
-      if @document.save
-        format.html { redirect_to :back, notice: 'Document was successfully created.' }
-        format.json { render :show, status: :created, location: @document }
-      else
-        format.html { render :new }
-        format.json { render json: @document.errors, status: :unprocessable_entity }
-      end
+    if @document.save
+      redirect_to :back, notice: 'Document was successfully created.'
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /documents/1
-  # PATCH/PUT /documents/1.json
   def update
-    @folder = Folder.find(document_params[:folder_id])
-
-    respond_to do |format|
-      if @document.update(document_params)
-        format.html { redirect_to :back, notice: 'Document was successfully updated.' }
-        format.json { render :show, status: :ok, location: @document }
-      else
-        format.html { render :edit }
-        format.json { render json: @document.errors, status: :unprocessable_entity }
-      end
+    if @document.update(document_params)
+      redirect_to :back, notice: 'Document was successfully updated.'
+    else
+      render :edit
     end
   end
 
   # DELETE /documents/1
   # DELETE /documents/1.json
   def destroy
-    @folder = Folder.find(document_params[:folder_id])
-
     @document.destroy
-    respond_to do |format|
-      format.html { redirect_to @folder, notice: 'Document was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to @folder, notice: 'Document was successfully destroyed.'
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_document
-      @document = Document.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def document_params
-      params.require(:document).permit(:name, :folder_id, :file)
-    end
+  def set_user_folders
+    @folders = current_user.folders
+  end
+
+  def set_document
+    @document = Document.find(params[:id])
+  end
+
+  def set_document_folder
+    @folder = Folder.find(document_params[:folder_id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list
+  def document_params
+    params.require(:document).permit(:name, :folder_id, :file)
+  end
 end

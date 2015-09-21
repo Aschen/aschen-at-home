@@ -10,8 +10,8 @@ class Series < ActiveRecord::Base
   # serialize :key_words
 
   has_attached_file :jacket,
-                    url: '/system/:class/:id_:basename.:extension',
-                    path: ':rails_root/public/system/:class/:id_:basename.:extension',
+                    url: '/system/:class/:id/:basename.:extension',
+                    path: ':rails_root/public/system/:class/:id/:basename.:extension',
                     default_url: '/images/missing_jacket.png'
   do_not_validate_attachment_file_type :jacket
 
