@@ -1,9 +1,6 @@
 ALL
  ALL
-  - add validation to ALL models
-  - Skinny controller, fat models
   - add associations in migration (cascade stuff)
-  - Clean all useless view
 
 SERIES
  ALL
@@ -16,7 +13,6 @@ SERIES
 DOCUMENTS
  ALL
   - Change video and document download method => put in private folder
-  - When delete folder => delete documents
  PRODUCTION
   - Force download start when clicking download document (otherwise there is a 'no route to GET /...'
   - Can't delete document (post request instead of delete), work for folders, wishes
