@@ -31,7 +31,7 @@ class TorrentDownloaderController < ApplicationController
     @season = Season.find(season_id)
     @series = Series.find(@season.series_id)
 
-    query = "#{@series.name} S#{t411_number(@season.number)}"
+    query = "#{@series.key_words} S#{t411_number(@season.number)}"
 
     @torrents = JSON(T411::Torrents.search(query, limit: 10))['torrents']
     if @torrents
@@ -58,7 +58,7 @@ class TorrentDownloaderController < ApplicationController
     @season = Season.find(@episode.season_id)
     @series = Series.find(@season.series_id)
 
-    query = "#{@series.name} S#{t411_number(@season.number)}E#{t411_number(@episode.number)}"
+    query = "#{@series.key_words} S#{t411_number(@season.number)}E#{t411_number(@episode.number)}"
 
     @torrents = JSON(T411::Torrents.search(query, limit: 10))['torrents']
     if @torrents
@@ -77,13 +77,18 @@ class TorrentDownloaderController < ApplicationController
 
     T411::Torrents.download(torrent_id, torrents_directory)
     # TODO : check file presence
-    torrent_info = TorrentFile.open(torrent_file(torrent_id)).to_h['info']
+    begin
+      torrent_info = TorrentFile.open(torrent_file(torrent_id)).to_h['info']
+    rescue ArgumentError
+      redirect_to controller: 'seasons', action: 'show', id: id, alert: "Cannot download torrent. (Thanks to shitty t411 API)"
+      return
+    end
 
     if type == 'season'
       PendingDownload.create(name: torrent_info['name'],
                              download_type: type,
                              season_id: id)
-      episodes = Episode.find_by(season_id: id)
+      episodes = Episode.where(season_id: id)
       # TODO : optimize request
       episodes.each do |episode|
         episode.downloaded = true

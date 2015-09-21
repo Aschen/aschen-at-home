@@ -76,3 +76,14 @@ gem 'whenever', :require => false
 gem 'streamio-ffmpeg'
 gem 'delayed_job_active_record'
 gem 'daemons'
+
+# Testing is good, really.
+group :test do
+  gem 'minitest-reporters'
+  gem 'mini_backtrace'
+  gem 'guard-minitest'
+end
+group :development, :test do
+  gem 'factory_girl_rails'
+  gem 'faker'
+end

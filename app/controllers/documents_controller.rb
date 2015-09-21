@@ -37,7 +37,7 @@ class DocumentsController < ApplicationController
 
     respond_to do |format|
       if @document.save
-        format.html { redirect_to :back, notice: 'Document was successfully created.' }
+        format.html { redirect_to @folder, notice: 'Document was successfully created.' }
         format.json { render :show, status: :created, location: @document }
       else
         format.html { render :new }

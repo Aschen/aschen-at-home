@@ -8,7 +8,7 @@ class Document < ActiveRecord::Base
   # useless to validates other file_* fields
 
   has_attached_file :file,
-    :url => "/system/:class/:id_:basename.:extension",
+    :url => "/:class/:id/:basename.:extension",
     :path => ":rails_root/public/:class/:id/:basename.:extension"
   do_not_validate_attachment_file_type :file
 end

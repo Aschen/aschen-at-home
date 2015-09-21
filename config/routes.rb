@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  get 'test_facto/hello'
+
+  get 'test_facto/toto'
+
+  get 'test_facto/titi'
+
   get 'torrent_downloader/login'
   post 'torrent_downloader/login'
 
