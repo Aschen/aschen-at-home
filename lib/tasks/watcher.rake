@@ -8,8 +8,7 @@ namespace :watcher do
     files = Dir.entries(Rails.configuration.x.directories.videos).select { |e| e != '.' && e != '..'}
 
     files.each do |file|
-      # TODO : filter by completed tag
-      pending_download = PendingDownload.find_by(name: file)
+      pending_download = PendingDownload.filename(file)
       next unless pending_download
 
       if pending_download.download_type == 'season'

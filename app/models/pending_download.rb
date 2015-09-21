@@ -4,6 +4,8 @@ class PendingDownload < ActiveRecord::Base
 
   after_create :set_episodes_downloaded
 
+  scope :filename, -> (file) { where(completed: false, name: file) }
+
   private
 
   def set_episodes_downloaded
