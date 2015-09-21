@@ -31,12 +31,12 @@ class Episode < ActiveRecord::Base
 
   def delete_files
     if original_file
-      path = "#{Rails.root}/public/#{@episode.original_file}"
+      path = "#{Rails.root}/public/#{original_file}"
       File.delete(path) if File.exist?(path)
     end
 
     if mp4_file
-      path = "#{Rails.root}/public/#{@episode.mp4_file}"
+      path = "#{Rails.root}/public/#{mp4_file}"
       File.delete(path) if File.exist?(path)
     end
   end

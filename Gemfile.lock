@@ -50,6 +50,7 @@ GEM
       execjs
       json
     bcrypt (3.1.10)
+    bencode (0.8.2)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     bootstrap-sass (3.2.0.2)
@@ -194,7 +195,6 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.1)
-    torrent-ruby (0.1.6)
     turbolinks (2.5.3)
       coffee-rails
     tzinfo (1.2.2)
@@ -217,6 +217,7 @@ PLATFORMS
 
 DEPENDENCIES
   autoprefixer-rails
+  bencode
   bootstrap-sass (~> 3.2.0)
   byebug
   coffee-rails (~> 4.1.0)
@@ -239,7 +240,6 @@ DEPENDENCIES
   sqlite3
   streamio-ffmpeg
   t411 (~> 0.0.8)!
-  torrent-ruby (~> 0.1.6)
   turbolinks
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
