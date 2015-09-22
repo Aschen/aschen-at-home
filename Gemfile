@@ -44,8 +44,6 @@ group :development, :test do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
  
-  # Vade retro spaghetti code
-  gem 'rubocop', require: false
 end
 
 
@@ -77,13 +75,15 @@ gem 'streamio-ffmpeg'
 gem 'delayed_job_active_record'
 gem 'daemons'
 
-# Testing is good, really.
-group :test do
-  gem 'minitest-reporters'
-  gem 'mini_backtrace'
-  gem 'guard-minitest'
-end
+# Vade retro spaghetti code
 group :development, :test do
+  gem 'rubocop', require: false
+end
+
+# Testing is good, really.
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0'
+  gem 'capybara', '~> 2.4.0'
   gem 'factory_girl_rails'
   gem 'faker'
 end
