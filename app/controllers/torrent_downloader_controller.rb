@@ -28,7 +28,6 @@ class TorrentDownloaderController < ApplicationController
     end
 
     set_season_series(@id)
-
     set_and_sort_torrents('size')
 
     render :show
@@ -46,7 +45,6 @@ class TorrentDownloaderController < ApplicationController
     end
 
     set_episode_season_series(@id)
-
     set_and_sort_torrents('seeders')
 
     render :show
