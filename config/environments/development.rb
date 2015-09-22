@@ -41,4 +41,8 @@ Rails.application.configure do
 
   # Devise
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  # Custom
+  config.x.directories.torrents = "#{Rails.root}/private/torrents"
+  config.x.directories.videos = "#{Rails.root}/private/videos"
 end

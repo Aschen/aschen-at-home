@@ -14,17 +14,33 @@ class Episode < ActiveRecord::Base
   # Delete physical files
   before_destroy :delete_files
 
+  def original_file!(file)
+    self.original_file = file
+    save
+  end
+
+  def mp4_file!(file)
+    self.mp4_file = file
+    save
+  end
+
+  def downloaded!(value = true)
+    self.downloaded = value
+    save
+  end
+
   private
 
   def convert_to_mp4
+    # Shitty hack, use condition in hook ?
+    return unless original_file
     avi_path = "#{Rails.root}/public/#{original_file}"
     Rails.logger.info("Start converting #{avi_path} to mp4")
     avi_video = FFMPEG::Movie.new(avi_path)
     options = { video_codec: 'libx264', audio_codec: 'libfdk_aac',
                 custom: '-movflags +faststart', threads: 3 }
     avi_video.transcode(avi_path.gsub('avi', 'mp4'), options)
-    self.mp4_file = original_file.gsub('avi', 'mp4')
-    save
+    mp4_file! original_file.gsub('avi', 'mp4')
     Rails.logger.info('Conversion success')
   end
   handle_asynchronously :convert_to_mp4

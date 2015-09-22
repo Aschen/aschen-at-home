@@ -80,4 +80,8 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # Custom
+  config.x.directories.torrents = '/torrent/watch'
+  config.x.directories.videos = '/torrent/completed'
 end

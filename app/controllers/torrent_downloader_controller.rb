@@ -56,7 +56,8 @@ class TorrentDownloaderController < ApplicationController
     type = params.require(:type)
     id = params.require(:id)
 
-    T411::Torrents.download(torrent_id, torrents_directory)
+    # TODO: Check if + '/' is useless
+    T411::Torrents.download(torrent_id, torrents_directory + '/')
     torrent_info = get_torrent_info(torrent_id)
     PendingDownload.create(name: torrent_info['name'], download_type: type,
                            "#{type}_id" => id)
@@ -99,7 +100,7 @@ class TorrentDownloaderController < ApplicationController
   end
 
   def torrent_file(torrent_id)
-    "#{torrents_directory}#{torrent_id}.torrent"
+    "#{torrents_directory}/#{torrent_id}.torrent"
   end
 
   def torrents_directory
