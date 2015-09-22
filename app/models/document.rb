@@ -3,6 +3,7 @@ class Document < ActiveRecord::Base
 
   validates :name, presence: true, length: { in: 3..50 }
   validates :file_file_name, presence: true
+  validates :folder_id, presence: true
 
   before_destroy :delete_file
 

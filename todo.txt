@@ -8,6 +8,7 @@ SERIES
   - Create folder for series and put each season inside
   - Create season dir with language, video quality => improve gem with T411::TagReader?
   - Re-download episode (replace file etc)
+  - Rewrite watcher.rake, search for filename recorded in pending_download
 
 DOCUMENTS
  ALL

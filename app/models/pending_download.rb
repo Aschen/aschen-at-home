@@ -2,6 +2,9 @@ class PendingDownload < ActiveRecord::Base
   belongs_to :season
   belongs_to :episode
 
+  validates :name, presence: true
+  validates :download_type, presence: true
+
   after_create :set_episodes_downloaded
 
   after_initialize :defaults

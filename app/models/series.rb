@@ -4,7 +4,8 @@ class Series < ActiveRecord::Base
 
   validates :name, presence: true
   validates :key_words, presence: true
-
+  validates :user_id, presence: true
+  
   before_destroy :delete_season
 
   # serialize :key_words
