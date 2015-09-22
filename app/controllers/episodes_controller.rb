@@ -15,7 +15,12 @@ class EpisodesController < ApplicationController
 
   # GET /episodes/new
   def new
-    @episode = Episode.new
+    season = Season.find(params.require(:season_id))
+    episode = Episode.new
+    episode.season_id = season.id
+    episode.number = season.episodes_count + 1
+    episode.save
+    redirect_to :back, notice: "Episode #{episode.number} successfully created"
   end
 
   # GET /episodes/1/edit
@@ -46,7 +51,7 @@ class EpisodesController < ApplicationController
   # DELETE /episodes/1.json
   def destroy
     @episode.destroy
-    redirect_to episodes_url, notice: 'Episode was successfully destroyed.'
+    redirect_to :back, notice: 'Episode was successfully destroyed.'
   end
 
   private

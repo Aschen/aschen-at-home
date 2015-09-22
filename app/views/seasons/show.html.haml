@@ -26,7 +26,11 @@
         %td{align: "center"}= link_to original_file_state_image(episode), episode.original_file
         %td{align: "center"}= link_to mp4_file_state_image(episode), episode.mp4_file
         %td{align: "center"}= link_to "T411 Download", {controller: :torrent_downloader, action: :episode, "episode_id" => episode.id}
-        %td{align: "center"}= link_to image_tag("icones/edit_icone.png", size: '30x30'), edit_season_path(@season)
+        - if episode.number == @season.episodes_count
+          %td{align: "center"}= link_to image_tag("icones/delete_icone.png", size: '30x30'), episode, :method => :delete, :data => { :confirm => 'Are you sure?' }
+%span
+  = link_to image_tag("icones/add_icone.png", size: '30x30'), {controller: :episodes, action: :new, season_id: @season.id}
+%br
 %br
 
 = link_to image_tag("icones/back_icone.png", size: '30x30'), @series

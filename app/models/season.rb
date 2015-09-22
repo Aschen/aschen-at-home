@@ -11,6 +11,10 @@ class Season < ActiveRecord::Base
 
   before_destroy :delete_episodes
 
+  def episodes_count!(value)
+    self.episodes_count += value
+    save
+  end
 
   def series
     Series.find(series_id)

@@ -8,11 +8,21 @@ class Episode < ActiveRecord::Base
 
   default_scope { order(number: :asc) }
 
+
+  # Delete old files
+  after_update :delete_files, if: :original_file_changed?
+
   # Start conversion when file is added
   after_update :convert_to_mp4, if: :original_file_changed?
 
   # Delete physical files
   before_destroy :delete_files
+
+  # Increment season episodes_count
+  after_create :increment_count
+
+  # Decrement season episodes_count
+  before_destroy :decrement_count
 
   def original_file!(file)
     self.original_file = file
@@ -31,8 +41,15 @@ class Episode < ActiveRecord::Base
 
   private
 
+  def increment_count
+    season.episodes_count!(1)
+  end
+
+  def decrement_count
+    season.episodes_count!(-1)
+  end
+
   def convert_to_mp4
-    # Shitty hack, use condition in hook ?
     return unless original_file
     avi_path = "#{Rails.root}/public/#{original_file}"
     Rails.logger.info("Start converting #{avi_path} to mp4")
