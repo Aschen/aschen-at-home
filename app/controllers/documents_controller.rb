@@ -45,7 +45,6 @@ class DocumentsController < ApplicationController
   end
 
   # DELETE /documents/1
-  # DELETE /documents/1.json
   def destroy
     @document.destroy
     redirect_to @folder, notice: 'Document was successfully destroyed.'

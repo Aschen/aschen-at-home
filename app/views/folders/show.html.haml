@@ -23,7 +23,7 @@
         %td{align: "center"}= document.name
         %td{align: "center"}= link_to image_tag("icones/download_icone.png", size: '30x30'), document.file.url
         %td{align: "center"}= link_to image_tag("icones/edit_icone.png", size: '30x30'), edit_document_path(document)
-        %td{align: "center"}= link_to image_tag("icones/delete_icone.png", size: '30x30'), document, method: :delete
+        %td{align: "center"}= link_to image_tag("icones/delete_icone.png", size: '30x30'), document, :method => :delete, :data => { :confirm => 'Are you sure?' }
 %br
 
 %span>
