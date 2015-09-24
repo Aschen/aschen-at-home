@@ -48,7 +48,7 @@ gem 'haml-rails', '~> 0.9'
 gem 'paperclip', '~> 4.3'
 
 # T411 is the best.
-gem 't411', '~> 0.0.8', git: 'https://github.com/Aschen/t411.git'
+gem 't411', '~> 0.0.9', git: 'https://github.com/Aschen/t411.git'
 gem 'json'
 
 # Can i readz torrents plz?
